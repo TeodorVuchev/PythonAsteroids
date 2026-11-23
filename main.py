@@ -5,10 +5,14 @@ from player import Player
 
 def main():
     pygame.init()
+    updatable = pygame.sprite.Group()
+    drawable = pygame.sprite.Group()
 
     # The Window Size
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    Player.containers = (updatable, drawable)
     player:Player = Player(SCREEN_WIDTH /2, SCREEN_HEIGHT/2)
+    print(len(drawable))
     
     clock = pygame.time.Clock()
     dt: float = 0.
@@ -20,11 +24,14 @@ def main():
             if event.type == pygame.QUIT:
                 return
 
-        #Check for Player Updates
-        player.update(dt)
+        #Check for all Player Entity Updates and Executes
+        updatable.update(dt)
 
         screen.fill("black")
-        player.draw(screen)
+
+        #Checks for all Player Entity draws and Executes
+        for sprite in drawable:
+            sprite.draw(screen)
         pygame.display.flip()
 
         #saves delta time, time that has past since last frame
