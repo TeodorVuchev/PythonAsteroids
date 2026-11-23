@@ -4,6 +4,8 @@ from logger import log_state
 from player import Player
 from asteroid import Asteroid
 from asteroidfield import AsteroidField
+from logger import log_event
+import sys
 
 def main():
     pygame.init()
@@ -34,6 +36,13 @@ def main():
 
         #Check for all Player Entity Updates and Executes
         updatable.update(dt)
+
+        #Check if Player is colliding with any Asteroids and act if he is
+        for sprite in asteroids:
+            if player.collides_with(sprite):
+                log_event("player_hit")
+                print("Game Over!")
+                sys.exit()
 
         screen.fill("black")
 
