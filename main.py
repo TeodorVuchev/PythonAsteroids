@@ -19,7 +19,10 @@ def main():
             # allows the X button on the pop up window to terminate the program
             if event.type == pygame.QUIT:
                 return
-        
+
+        #Check for Player Updates
+        player.update(dt)
+
         screen.fill("black")
         player.draw(screen)
         pygame.display.flip()
