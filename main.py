@@ -52,7 +52,8 @@ def main():
             #Check if projectiles and asteroids are colliding and destroy accordingly
             for shot in shots:
                 if shot.collides_with(asteroid):
-                    asteroid.kill()
+                    log_event("asteroid_shot")
+                    asteroid.split()
                     shot.kill()
 
         screen.fill("black")
