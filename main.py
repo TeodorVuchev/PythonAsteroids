@@ -40,13 +40,20 @@ def main():
 
         #Check for all Player Entity Updates and Executes
         updatable.update(dt)
+        #Checking for collision scenarios
+        for asteroid in asteroids:
 
-        #Check if Player is colliding with any Asteroids and act if he is
-        for sprite in asteroids:
-            if player.collides_with(sprite):
+            #Check if Player is colliding with any Asteroids and act if he is
+            if player.collides_with(asteroid):
                 log_event("player_hit")
                 print("Game Over!")
                 sys.exit()
+
+            #Check if projectiles and asteroids are colliding and destroy accordingly
+            for shot in shots:
+                if shot.collides_with(asteroid):
+                    asteroid.kill()
+                    shot.kill()
 
         screen.fill("black")
 
